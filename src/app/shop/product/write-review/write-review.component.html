@@ -1,0 +1,246 @@
+<app-breadcrumb [title]="" [breadcrumb]="'Write Review'" *ngIf="loaded"></app-breadcrumb>
+<!-- section start -->
+<section class="section-b-space" *ngIf="loaded">
+    <div class="collection-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="collection-filter" [class.openFilterbar]="mobileSidebar">
+                        <div class="collection-filter-block">
+                            <div class="collection-mobile-back" (click)="toggleMobileSidebar()">
+                                <span class="filter-back">
+                                    <i class="fa fa-angle-left" aria-hidden="true"></i> back
+                                </span>
+                            </div>
+                            <app-categories></app-categories>
+                        </div>
+                        <div class="collection-filter-block">
+                            <app-services></app-services>
+                        </div>
+                        <app-product-box-vertical-slider [title]="'New product'" [type]="'608fd45ea6bd651ce725329e'">
+                        </app-product-box-vertical-slider>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-sm-12 col-xs-12">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="filter-main-btn mb-2">
+                                    <span class="filter-btn" (click)="toggleMobileSidebar()">
+                                        <i class="fa fa-bars" aria-hidden="true"></i> sidebar
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <owl-carousel-o [options]="ProductDetailsMainSliderConfig" #owlCar
+                                    class="product-slick">
+                                    <ng-container *ngFor="let image of product?.images; index as i">
+                                        <ng-template carouselSlide [id]="i">
+                                            <div>
+                                                <img [defaultImage]="image.src" [lazyLoad]="image.src" [alt]="image.alt"
+                                                    class="img-fluid">
+                                            </div>
+                                        </ng-template>
+                                    </ng-container>
+                                </owl-carousel-o>
+                                <div class="col-12 p-0" *ngIf="product?.images.length > 1">
+                                    <div class="slider-nav">
+                                        <owl-carousel-o [options]="ProductDetailsThumbConfig" class="product-slick">
+                                            <ng-container *ngFor="let image of product?.images; index as i">
+                                                <ng-template carouselSlide [id]="i">
+                                                    <div class="owl-thumb" [class.active]="i == activeSlide">
+                                                        <img [defaultImage]="image.src" [lazyLoad]="image.src"
+                                                            [alt]="image.alt" class="img-fluid"
+                                                            (click)="owlCar.to(activeSlide = i.toString())">
+                                                    </div>
+                                                </ng-template>
+                                            </ng-container>
+                                        </owl-carousel-o>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 rtl-text">
+                                <div class="product-right">
+                                    <h2>{{ product?.title }}</h2>
+                                    <h3 *ngIf="product.sale; else regularprice">${{(product.price -
+                                        product.discount).toFixed(2)}}
+                                        <del>${{product.price}}</del>
+                                    </h3>
+                                    <ng-template #regularprice>
+                                        <h3>${{product.price}}</h3>
+                                    </ng-template>
+                                    <h6 *ngIf="product.variants.length > 1" class="product-title size-text"
+                                        style="padding-bottom: 12px;">
+                                        Select Variant
+                                    </h6>
+                                    <ul class="color-variant" *ngIf="product.variants.length > 1">
+                                        <li [class.active]="variant._id == selectedVariant"
+                                            *ngFor="let variant of product.variants; index as i">
+                                            <a href="javascript:void(0)" (click)="selectVariant(variant)">
+                                                <img [src]="variant.image" style="width: 30px; height:30px; border-radius: 50%;
+                        border: 1px solid #CED4DA; top: -1px; left: -1px">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <h6 *ngIf="product.variants.length > 1">
+                                        {{selectedVariantName}}
+                                    </h6>
+                                    <div class="product-description border-product">
+                                        <h6 class="product-title size-text" *ngIf="product.sizes.length > 1">
+                                            select size
+                                            <!-- <span>
+                        <a href="javascrip:void(0)" (click)="SizeChart.openModal()">size chart</a>
+                      </span> -->
+                                        </h6>
+                                        <div class="size-box" *ngIf="product.sizes.length > 1">
+                                            <ul>
+                                                <li [class.active]="selectedSize == size._id"
+                                                    *ngFor="let size of product.sizes">
+                                                    <a href="javascript:void(0)" (click)="selectSize(size)">
+                                                        {{ size.name | titlecase }}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- 
+                    <h5 class="avalibility" *ngIf="counter <= product.stock"><span>In Stock</span></h5>
+                    <h5 class="avalibility" *ngIf="counter > product.stock"><span>Out of Stock</span></h5>
+                     -->
+                                        <h6 class="product-title">quantity</h6>
+                                        <div class="qty-box">
+                                            <div class="input-group">
+                                                <span class="input-group-prepend">
+                                                    <button type="button" class="btn quantity-left-minus"
+                                                        data-type="minus" (click)="decrement()">
+                                                        <i class="ti-angle-left"></i>
+                                                    </button>
+                                                </span>
+                                                <input type="text" name="quantity" class="form-control input-number"
+                                                    [value]="counter" disabled />
+                                                <span class="input-group-prepend">
+                                                    <button type="button" class="btn quantity-right-plus"
+                                                        data-type="plus" (click)="increment()">
+                                                        <i class="ti-angle-right"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-buttons">
+                                        <a href="javascript:void(0)" class="btn btn-solid" [class.disabled]="false"
+                                            (click)="addToCart()" style="position: relative; left: -9px;">add
+                                            to bag</a>
+                                        <!-- <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="false" (click)="addToWishlist()"
+                      style="width: 150px;">add to wishlist</a> -->
+                                    </div>
+                                    <div class="border-product">
+                                        <h6 class="product-title">product description</h6>
+                                        <div [innerHTML]="product.description.substring(0, 200)+'...' "></div>
+                                    </div>
+                                    <div class="border-product">
+                                        <h6 class="product-title">share it</h6>
+                                        <div class="product-icon">
+                                            <app-social></app-social>
+                                            <form class="d-inline-block">
+                                                <button *ngIf="!isInWatchlist" class="wishlist-btn"
+                                                    (click)="addToWishlist()">
+                                                    <i class="ti-heart"></i>
+                                                    <span class="title-font">Add To WishList</span>
+                                                </button>
+                                                <button *ngIf="isInWatchlist" class="wishlist-btn"
+                                                    (click)="removeFromWishlist()">
+                                                    <i class="fa fa-heart"></i>
+                                                    <span class="title-font" style="font-size: 16px;">Remove From
+                                                        WishList</span>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="border-product" *ngIf="product.sale == true">
+                                        <app-countdown [date]="countdownDateString"></app-countdown>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <section class="tab-product m-0">
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-12">
+                                <ngb-tabset [type]="'tabs'" class="nav-material">
+                                    <ngb-tab>
+                                        <ng-template ngbTabTitle>Write Review</ng-template>
+                                        <ng-template ngbTabContent>
+                                            <form class="theme-form" #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+                                                <div class="form-row">
+                                                    <div class="col-md-12 ">
+                                                        <div class="media">
+                                                            <label for="stars">Rating</label>
+                                                        </div>
+                                                        &nbsp;
+                                                        <div class="stars" id="stars">
+                                                            <input class="star star-5" id="star-5" type="radio"
+                                                                name="star" value="5" (change)="onChange('star-5')" />
+                                                            <label class="star star-5" for="star-5"></label>
+                                                            <input class="star star-4" id="star-4" type="radio"
+                                                                name="star" value="4" (change)="onChange('star-4')" />
+                                                            <label class="star star-4" for="star-4"></label>
+                                                            <input class="star star-3" id="star-3" type="radio"
+                                                                name="star" value="3" (change)="onChange('star-3')" />
+                                                            <label class="star star-3" for="star-3"></label>
+                                                            <input class="star star-2" id="star-2" type="radio"
+                                                                name="star" value="2" (change)="onChange('star-2')" />
+                                                            <label class="star star-2" for="star-2"></label>
+                                                            <input class="star star-1" id="star-1" type="radio"
+                                                                name="star" value="1" (change)="onChange('star-1')" />
+                                                            <label class="star star-1" for="star-1"></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="name">Name</label>
+                                                        <input type="text" class="form-control" id="name"
+                                                            placeholder="Enter Your name" required disabled
+                                                            [(ngModel)]="user.firstName+' '+user.lastName" name="name">
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="email">Email</label>
+                                                        <input type="text" class="form-control" id="email"
+                                                            placeholder="Email" required [(ngModel)]="user.username"
+                                                            disabled ngModel name="email">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label for="review">Review Title</label>
+                                                        <input type="text" class="form-control" id="title"
+                                                            placeholder="Enter your Review Title" required ngModel
+                                                            name="title">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label for="review">Review</label>
+                                                        <textarea class="form-control"
+                                                            placeholder="Wrire Your Testimonial Here" id="review"
+                                                            rows="6" name="review" ngModel required></textarea>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <button class="btn btn-solid"
+                                                            [disabled]="!(f.valid && rating > 0)" type="submit">Submit
+                                                            Your
+                                                            Review</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </ng-template>
+                                    </ngb-tab>
+                                </ngb-tabset>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <app-related-product [type]="product?.type"></app-related-product> -->
+</section>
+<app-size-modal #sizeChart [product]="product"></app-size-modal>
+<!-- Section ends -->

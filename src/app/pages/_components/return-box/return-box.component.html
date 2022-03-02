@@ -1,0 +1,73 @@
+<div class="return-box">
+    <div class="return-box-header">
+        <div class="return-inner-header-box" style="width: 100%;">
+            <div class="return-date-column">
+                <div class="header-label">DATE</div>
+                <div class="header-value">{{statusTime}} {{statusDate}}</div>
+            </div>
+            <div class="return-price-column">
+                <div class="header-label">ITEM PRICE</div>
+                <div class="header-value">{{"$" + getPrice}}</div>
+            </div>
+            <div class="return-quantity-column">
+                <div class="header-label">QUANTITY</div>
+                <div class="header-value">{{getQuantity}}</div>
+            </div>
+            <div class="return-subtotal-column">
+                <div class="header-label">SUBTOTAL</div>
+                <div class="header-value">{{"$" + getSubtotal}}</div>
+            </div>
+            <div class="return-tax-column">
+                <div class="header-label">TAX</div>
+                <div class="header-value">{{"$" + getTax}}</div>
+            </div>
+            <div class="return-total-column">
+                <div class="header-label">TOTAL</div>
+                <div class="header-value">{{"$" + getTotal}}</div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="order-box-body">
+        <div class="order-box-inner-body">
+            <div class="order-box-upper-box">
+                <h4><b>{{returnStatusString}}</b></h4>
+                <!-- <p style="font-size: 16px;">{{orderString}}</p> -->
+            </div>
+            <div class="order-box-lower-container">
+                <div class="order-box-lower-column1">
+                    <div class="order-box-lower-container" style="margin-bottom: 10px;">
+                        <div class="lower-box-row-image">
+                            <a href="javascript:void(0)"
+                                [routerLink]="['/shop/product/left/sidebar/',item.product._id]"><img
+                                    [src]="item.product.image.src" style="height: 100px; width:100px"></a>
+                        </div>
+                        <div class="lower-box-row-content">
+                            <div class="lower-box-row-content1">
+                                <a href="javascript:void(0)"
+                                    [routerLink]="['/shop/product/left/sidebar/', item.product._id]">{{item.product.title}}</a>
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <p>Variant: <b>{{item.variant.name}}</b> | Size: <b>{{item.size.name}}</b></p>
+                            </div>
+                        </div>
+                        <div class="lower-box-button-content">
+                            <div class="lower-box-row-content1">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-box-lower-column2" *ngIf="!returnStarted">
+                    <button class="btn btn-primary" style="width: 100%; border-radius: 4px;"
+                        (click)="processItem()">Return This Item</button>
+                </div>
+                <div class="order-box-lower-column2" *ngIf="returnStarted">
+                    <button class="btn btn-warning" style="width: 100%; border-radius: 4px;" (click)="viewStatus()">View
+                        Status</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<app-breadcrumb [title]="'Login'" [breadcrumb]="'Login'"></app-breadcrumb>
+<!-- section start -->
+<section class="login-page section-b-space">
+    <div class="container">
+        <div class="row" #messageRow>
+            <div class="col-lg-11">
+                <h5 class="redirectMessage">You have been redirected here because {{message}}. Please login using this
+                    account or create a new account. Thank you!</h5>
+            </div>
+            <div class="col-lg-1">
+                <button type="button" class="close col-xs-2 closeButton" aria-label="Close"
+                    (click)="closeMessageClicked()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        &nbsp;
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Login</h3>
+                <div class="theme-card">
+                    <form class="theme-form" (ngSubmit)="onSubmit(f.value)" #f="ngForm">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" id="email" placeholder="Email" required="" ngModel
+                                name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password"
+                                required="" ngModel name="password">
+                        </div>
+                        <div id="forgot-password-wrapper">
+                            <div class="form group stay-signed-in-checkbox">
+                                <input type="checkbox" class="standard-form" id="stay-signed-in" ngModel
+                                    name="remember">
+                                <label id="remember-me-label" for="stay-signed-in">
+                                    Remember Me
+                                </label>
+                            </div>
+                            <div id="forgot-password">
+                                <a href="javascript:void(0)" (click)="forgotPassword()" style="color: #578CCF;">Forgot
+                                    Your
+                                    Password?</a>
+                            </div>
+                        </div>
+                        <button class="btn btn-solid" [disabled]="!f.valid">Login</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6 right-login">
+                <h3>New Customer</h3>
+                <div class="theme-card authentication-right">
+                    <h6 class="title-font">Create An Account</h6>
+                    <p>Sign up for a free account at our store. Registration is quick and easy. It allows you to be able
+                        to order from our shop. To start shopping click register.</p>
+                    <button class="btn btn-solid" routerLink="/pages/register">Create an Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Section ends-->

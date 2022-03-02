@@ -1,0 +1,92 @@
+<ng-template class="theme-modal" #quickView let-modal>
+    <div class="modal-content quick-view-modal">
+        <div class="modal-body">
+            <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="row">
+                <div class="col-lg-12  col-xs-12 center">
+                    <div class="quick-view-img">
+                        <img [src]="product.image.src ? product.image.src : ImageSrc" [alt]="ImageSrc"
+                            class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-12 rtl-text center">
+                    <div class=" product-right">
+                        <h2>{{ product.title | titlecase }}</h2>
+                        <h3 *ngIf=" product.sale; else regularprice">${{(product.price - product.discount).toFixed(2)}}
+                            <del>${{product.price}}</del>
+                        </h3>
+                        <ng-template #regularprice>
+                            <h3>${{product.price}}</h3>
+                        </ng-template>
+                        <hr *ngIf="product.variants.length > 1">
+                        <h6 *ngIf="product.variants.length > 1" class="product-title size-text"
+                            style="padding-bottom: 12px;">
+                            Select Variant
+                        </h6>
+                        <ul class="color-variant" *ngIf="product.variants.length > 1">
+                            <li [class.active]="variant._id == selectedVariant"
+                                *ngFor="let variant of product.variants; index as i">
+                                <a href="javascript:void(0)" (click)="selectVariant(variant)">
+                                    <img [src]="variant.image" style="width: 30px; height:30px; border-radius: 50%;
+                                border: 1px solid #CED4DA; top: -1px; left: -1px">
+                                </a>
+                            </li>
+                        </ul>
+                        <h6 *ngIf="product.variants.length > 1">
+                            {{selectedVariantName}}
+                        </h6>
+                        <hr *ngIf="product.sizes.length > 1">
+                        <h6 class="product-title size-text" *ngIf="product.sizes.length > 1">
+                            select size
+                        </h6>
+                        <div class="size-box" *ngIf="product.sizes.length > 1">
+                            <ul>
+                                <li [class.active]="selectedSize == size._id" *ngFor="let size of product.sizes">
+                                    <a href="javascript:void(0)" (click)="selectSize(size)">
+                                        {{ size.name | titlecase }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product-description">
+                            <hr>
+                            <div class="center">
+                                <h6 class="product-title">product details</h6>
+                                <div [innerHTML]="product.description.substring(0, 200)+'...' "></div>
+                            </div>
+                            <div class="product-description center" style="padding-top:10px;">
+                                <hr>
+                                <h6 class="product-title">quantity</h6>
+                                <div class="qty-box center">
+                                    <div class="input-group center">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn quantity-left-minus" data-type="minus"
+                                                (click)="decrement()">
+                                                <i class="ti-angle-left"></i>
+                                            </button>
+                                        </span>
+                                        <input type="text" name="quantity" class="form-control input-number"
+                                            [value]="counter" disabled>
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn quantity-right-plus" data-type="plus"
+                                                (click)="increment()">
+                                                <i class="ti-angle-right"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-buttons" style="padding-top: 20px">
+                                <a href="javascript:void(0)" class="btn btn-solid" (click)="addToBag()">add to bag</a>
+                                <a [routerLink]="['/shop/product/left/sidebar/', product._id]"
+                                    class="btn btn-solid">view item</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

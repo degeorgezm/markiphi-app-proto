@@ -1,0 +1,256 @@
+
+
+.return-box {
+    border: 1px solid #DDDDDD;
+    min-width: 820px;
+}
+
+.return-box-header {
+    width: 100%;
+    position: block;
+    height: 67px;
+    background-color: #F6F6F6;
+    border-bottom: 1px solid #DDDDDD;
+    border-radius: 4px 4px 0 0;
+}
+
+.return-inner-header-box {
+    width: 100%;
+    position: relative;
+    padding: 14px 18px;
+}
+
+.order-box-body {
+    min-height: 130px;
+    background-color: white;
+    border-radius: 0 0 4px 4px;
+}
+
+.return-date-column {
+    margin-right: 2%;
+    float: left;
+    min-height: 1px;
+    overflow: visible;
+    width: 15%;  
+}
+
+.return-price-column {
+    margin-right: 2%;
+    float: left;
+    min-height: 1px;
+    overflow: visible;
+    width: 15%;
+}
+
+
+.return-total-column {
+    width: 15%;
+    margin-right: 2%;
+    min-height: 1px;
+    overflow: visible;
+    float: left;
+}
+
+.return-tax-column {
+    width: 15%;
+    margin-right: 2%;
+    min-height: 1px;
+    overflow: visible;
+    float: left;
+}
+
+.return-subtotal-column {
+    width: 15%;
+    margin-right: 2%;
+    min-height: 1px;
+    overflow: visible;
+    float: left;
+}
+
+.ship-to-column {
+    width: 27%;
+    float:left;
+    position: relative;
+    min-height: 1px;
+    margin-right: 2%;
+    overflow: visible;
+}
+
+.return-quantity-column {
+    width: 15%;
+    float: left;
+    min-height: 1px;
+    overflow: visible;
+}
+
+.header-label {
+    font-size: 12px!important;
+    line-height: 16px!important;
+}
+
+.header-value {
+    font-size: 14px!important;
+    line-height: 20px!important;
+}
+
+.header-value a {
+    font-size: 14px!important;
+    line-height: 20px!important;
+}
+
+.ship-to-address a {
+    font-size: 14px!important;
+    line-height: 20px!important;
+}
+
+
+.ship-to-address {
+    &:after {
+        content: "\f107";
+        font-family: FontAwesome;
+        margin-left: 5px;
+        color: #737373;
+    }
+}
+
+  .order-details-column {
+      width: 170px;
+      float: right;
+      text-align: right;
+  }
+
+  .order-box-inner-body {
+    width: 100%;
+    position: relative;
+    padding: 14px 18px;
+  }
+
+  .order-box-upper-box {
+      width: 100%;
+  }
+  
+  .order-box-lower-container {
+      width: 100%;
+  }
+
+  .order-box-lower-column1 {
+      width: 75%;
+      float: left;
+  }
+
+  .order-box-lower-column2 {
+      width: 25%;
+      float: right;
+  }
+
+  .order-box-lower-container:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .lower-box-row-image {
+      height: 100px;
+      width: 15%;
+      float: left;
+  }
+
+  .lower-box-row-content {
+      width: 80%;
+      float: right;
+      margin-top: 15px;
+      text-align: left;
+      margin-left: 0px;
+  }
+
+  .lower-box-button-content {
+      width: 100%;
+      float: left;
+      margin-top: -50px;
+      margin-left: 150px;
+      text-align: left;
+  }
+  
+
+  .lower-box-row-content a {
+      line-height: 20px;
+      font-size: 16px;
+  }
+
+  .top-header {
+      height: 100px;
+      width: 100%;
+      background-color: white;
+  }
+
+  .top-image {
+      width: 20%;
+      float: left;
+  }
+
+  .top-title {
+    padding: 10px 10px;
+    text-align: left;
+    height: 70px;
+    width: 80%
+  }
+
+  .top-select {
+      height: 30px;
+  }
+
+  .middle-body {
+      height: 200px;
+      background-color: white;
+      width: 100%;
+  }
+
+  select {
+    margin-top: -15px;
+    margin-left: 105px;
+    width: 150px;
+    padding: 5px 35px 5px 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(../../../../assets/images/icon/chevron-down.png) 96% / 10% no-repeat #eee;
+  }
+
+  .radio {
+    margin-left: 10px;
+  }
+
+  input[type="radio"]+label {
+    margin-top:1px;
+  }
+
+.row-padding {
+    padding: 10px 10px;
+}
+
+.hidden-input {
+    max-height: 0px;
+    overflow: hidden;
+    display: none;
+}
+
+.show-input {
+    max-height: 200px;
+    overflow:visible;
+    display:initial;
+}
+
+#other-reason-input {
+    max-height: 200px;
+    -webkit-transition: max-height 0.7s ease-in 0s;
+    -moz-transition: max-height 0.7s ease-in 0s;
+    -o-transition: max-height 0.7s ease-in 0s;
+    transition: max-height 0.7s ease-in 0s;
+}
+
+
+  
+  
+

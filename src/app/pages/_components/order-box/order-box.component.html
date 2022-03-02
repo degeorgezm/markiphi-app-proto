@@ -1,0 +1,100 @@
+<div class="order-box">
+    <div class="order-box-header">
+        <div class="order-inner-header-box" style="width: 100%;">
+            <div class="order-placed-column">
+                <div class="header-label">ORDER PLACED</div>
+                <div class="order-placed-date">{{orderDateString}}</div>
+            </div>
+            <div class="order-total-column">
+                <div class="header-label">TOTAL</div>
+                <div class="order-total-total">{{"$" + order.total.toFixed(2)}}</div>
+            </div>
+            <div class="ship-to-column">
+                <div class="header-label">
+                    SHIP TO
+                </div>
+                <div class="ship-to-address">
+                    <ng-template #popContent>
+                        <p>{{order.shipping_address.address1}} {{order.shipping_address.address2}}</p>
+                        <p>{{order.shipping_address.city}}, {{order.shipping_address.state}}
+                            {{order.shipping_address.zip}}</p>
+                        <p>Phone: {{order.shipping_address.phone}}</p>
+                    </ng-template>
+                    <a href="javascript:void(0)" placement="bottom" [ngbPopover]="popContent"
+                        popoverTitle="{{order.shipping_address.name}}"
+                        triggers="mouseenter:mouseleave">{{order.shipping_address.name}}</a>
+                </div>
+            </div>
+            <div class="order-details-column">
+                <div class="header-label">ORDER # {{order.orderId}}</div>
+                <div class="order-details-links"><a href="javascript:void(0)" (click)="viewOrderDetails(order)">Order
+                        details</a> | <a href="javascript:void(0)">View invoice</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="order-box-body">
+        <div class="order-box-inner-body">
+            <div class="order-box-upper-box">
+                <h4><b>{{orderStatusString}}</b></h4>
+                <p style="font-size: 16px;">{{orderString}}</p>
+            </div>
+            <div class="order-box-lower-container">
+                <div class="order-box-lower-column1">
+                    <div *ngFor="let item of order.items" class="order-box-lower-container"
+                        style="margin-bottom: 10px;">
+                        <div class="lower-box-row-image">
+                            <a href="javascript:void(0)"
+                                [routerLink]="['/shop/product/left/sidebar/', item.product._id]"><img
+                                    [src]="item.product.image.src"
+                                    style="height: 150px; width:150px; margin-top: 30px;"></a>
+                        </div>
+                        <div class="lower-box-row-content">
+                            <div class="lower-box-row-content1">
+                                <a href="javascript:void(0)"
+                                    [routerLink]="['/shop/product/left/sidebar/', item.product._id]">{{item.product.title}}</a>
+                            </div>
+                            <div class="lower-box-row-content1">
+                                <h6>Quantity: <b>{{item.quantity}}</b></h6>
+                                <h6>Size: <b>{{item.size.name}}</b> | Variant: <b>{{item.variant.name}}</b></h6>
+                                <h6>SKU: <b>{{item.sku}}</b></h6>
+                                <h6>Status: <b>{{item.status.status}}</b></h6>
+                            </div>
+                        </div>
+                        <div class="lower-box-button-content">
+                            <div class="lower-box-row-content1">
+                                <button class="btn btn-primary" style="border-radius: 4px;" *ngIf="!backend"
+                                    (click)="buyAgain(item)">Buy
+                                    Again</button>
+                                <button class="btn btn-secondary" style="margin-left: 20px; border-radius: 4px;"
+                                    *ngIf="!backend"
+                                    [routerLink]="['/shop/product/left/sidebar/', item.product._id]">View
+                                    Item</button>
+                                <button class="btn btn-info" style="border-radius: 4px; margin-left: 20px"
+                                    *ngIf="!backend && item.review == undefined" (click)="writeReview(item)">Write
+                                    a review</button>
+                                <button class="btn btn-primary" style="border-radius: 4px;" *ngIf="backend">View
+                                    Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-box-lower-column2">
+                    <button class="btn btn-primary" style="width: 100%; border-radius: 4px;" *ngIf="!backend"
+                        [routerLink]="['/pages/returns', order._id]">Request
+                        return</button>
+                    <button class="btn btn-warning" style="width: 100%; border-radius: 4px; margin-top: 10px;"
+                        *ngIf="!backend">Report Problem
+                        with order</button>
+                    <button class="btn btn-light" style="width:100%; border-radius: 4px;" *ngIf="backend">Cancel
+                        Order</button>
+                    <button class="btn btn-light" style="width:100%; border-radius: 4px; margin-top: 10px"
+                        *ngIf="backend">Process a
+                        Return</button>
+                    <button class="btn btn-light" style="width:100%; border-radius: 4px; margin-top: 10px"
+                        *ngIf="backend">Order Not Received</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-quick-view #quickView></app-quick-view>

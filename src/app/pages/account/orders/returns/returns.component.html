@@ -1,0 +1,36 @@
+<app-breadcrumb [title]="'Returns'" [breadcrumb]="'Returns'"></app-breadcrumb>
+<!-- section start -->
+<section class="section-b-space" *ngIf="loaded">
+    <div class="col-lg-9 col-md-12 col-sm-12 center">
+        <h4>What items would you like to return?</h4>
+        <h5>Please note that all returns are processed seperately and are subject to a review that can take up to two
+            days to be approved.</h5>
+        <hr>
+        <div class="container">
+            <div class="left">
+                <h5>ORDER # <b>{{order.orderId}}</b></h5>
+                <h5>Order Created: <b>{{orderCreatedTime}} {{orderCreatedDate}} </b></h5>
+                <h5>Order Status: <b>{{orderStatus.status}}</b></h5>
+                <h5>Status Updated: <b>{{orderStatusTime}} {{orderStatusDate}} </b></h5>
+                <ng-template #popContent>
+                    <p>{{order.shipping_address.address1}} {{order.shipping_address.address2}}</p>
+                    <p>{{order.shipping_address.city}}, {{order.shipping_address.state}}
+                        {{order.shipping_address.zip}}</p>
+                    <p>Phone: {{order.shipping_address.phone}}</p>
+                </ng-template>
+                <h5 class="ship-to">Ship To: <b><a href="javascript:void(0)" placement="bottom"
+                            [ngbPopover]="popContent" popoverTitle="{{order.shipping_address.name}}"
+                            triggers="mouseenter:mouseleave">{{order.shipping_address.name}}</a></b></h5>
+            </div>
+            <div class="right">
+                <h5>Subtotal: <b>{{"$"+order.sub_total.toFixed(2)}}</b></h5>
+                <h5>Tax: <b>{{"$"+order.tax.toFixed(2)}}</b></h5>
+                <h5>Total: <b>{{"$"+order.total.toFixed(2)}}</b></h5>
+            </div>
+        </div>
+        <div *ngFor="let item of order.items" style="width: 100%;" class="return-box">
+            <app-return-box [order]="order" [item]="item"></app-return-box>
+        </div>
+    </div>
+</section>
+<!-- section End -->

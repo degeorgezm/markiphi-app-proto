@@ -1,0 +1,27 @@
+.return-box {
+    margin-top: 15px;
+}
+
+.ship-to {
+    &:after {
+        content: "\f107";
+        font-family: FontAwesome;
+        margin-left: 5px;
+        color: #737373;
+    }
+}
+
+.container {
+    width: 100%;
+    min-height: 160px;
+}
+
+.left {
+    float: left;
+    width: 50%;
+}
+
+.right {
+    width: 50%;
+    float: right;
+}

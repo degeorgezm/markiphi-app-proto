@@ -1,0 +1,127 @@
+.onhover-show-div li {
+    width: 150px;
+    background-color:#F8F8F8;
+}
+
+#account-menu li:last-child {
+    float: right;
+}
+
+.header-dropdown ul {
+    background-color:#F8F8F8;
+}
+
+.header-dropdown {
+    padding-right: 0px;
+}
+
+@media (min-width: 578px) {
+    .mobile-search {
+        display: none;
+    }
+
+    .search-container {
+        display: block;
+    }
+
+    .menu-right {
+        min-width: 155px;
+    }
+
+    .brand-logo {
+        min-width: 142px;
+        padding-right: 15px;
+    }
+
+    /* .top-header {
+        height: 60px; 
+    } */
+}
+
+@media (max-width: 578px) {
+    .mobile-search {
+        display: block;
+    }
+
+    .search-container {
+        display: none;
+    }
+}
+
+.search-container {
+    display: relative;
+    width: 100%
+  }
+
+.search-input {
+    width: 80%;
+}
+
+.search-button {
+    width: 20%;
+    float: right;
+}
+  
+.search-container input[type=text] {
+    padding: 6px;
+    margin-top: 5px;
+    height: 50px;
+    font-size: 17px;
+    border: 1px solid #ddd;
+    float: left;
+  }
+  
+.search-container button {
+    padding: 6px 10px;
+    margin-top: 5px;
+    height: 50px;
+    width: 50px;
+    background: #ddd;
+    font-size: 17px;
+    border: 1px solid #ddd;
+    border: 1px solid #ddd;
+    cursor: pointer;
+  }
+
+.mobile-search-container {
+    width: 100%;
+    overflow: hidden;
+    -webkit-transition: all 0.7s ease 0s;
+    -moz-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+  }
+  
+.mobile-search-container input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    //border: 1px solid #ddd;
+    border: none;
+    float: left;
+    width: 80vw;
+  }
+  
+.mobile-search-container button {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 6px 10px;
+    margin-right: 0px;
+    background: #ddd;
+    font-size: 17px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    border-left: 2px solid #ddd;
+    border-right: 2px solid #ddd;
+    width: 50px;
+    height: 50px;
+  }
+
+  .hidden {
+      top: 100%;
+      display: none;
+  }
+
+
+

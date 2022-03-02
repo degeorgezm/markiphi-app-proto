@@ -1,0 +1,239 @@
+<!-- <app-breadcrumb [title]="'Dashboard'" [breadcrumb]="'Dashboard'"></app-breadcrumb> -->
+<!-- section start -->
+
+<section class="section-b-space">
+    <div class="container">
+        <div class="row" #messageRow>
+            <div class="col-lg-11">
+                <h5 class="redirectMessage">Welcome <b>{{user.firstName}} {{user.lastName}}</b>. You have successfully
+                    created your new Designica account with the email <b>{{user.email}}</b>. Please take the time to
+                    look around the dashboard and finish creating your profile, such
+                    as by adding a billing address or payment method. Thank you!</h5>
+            </div>
+            <div class="col-lg-1">
+                <button type="button" class="close col-xs-2 close-button" aria-label="Close"
+                    (click)="closeMessageClicked()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        &nbsp;
+        <div class="row ">
+            <div class="col-lg-3 ">
+                <div class="account-sidebar " (click)="ToggleDashboard() ">
+                    <a hre="javascript:void(0) " class="popup-btn" style="color: white;">
+                        my account
+                    </a>
+                </div>
+                <div class="dashboard-left " [class.open]="openDashboard ">
+                    <div class="collection-mobile-back " (click)="ToggleDashboard() ">
+                        <span class="filter-back ">
+                            <i class="fa fa-angle-left " aria-hidden="true "></i> back
+                        </span>
+                    </div>
+                    <div class="block-content ">
+                        <ul>
+                            <li class="active "><a href="javascript:void(0) ">Account Info</a></li>
+                            <li><a href="javascript:void(0)" routerLink="/pages/addresses">Address Book</a></li>
+                            <li><a href="javascript:void(0)" routerLink="/pages/orders">My Orders</a></li>
+                            <li><a href="javascript:void(0)" routerLink="/shop/wishlist">My Wishlist</a></li>
+                            <li><a href="javascript:void(0)">Newsletter</a></li>
+                            <li><a href="javascript:void(0)">My Account</a></li>
+                            <li><a href="javascript:void(0)" routerLink="/pages/change/password">Change Password</a>
+                            </li>
+                            <li class="last "><a href="javascript:void(0)" (click)="logout()">Log Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 ">
+                <div class="dashboard-right ">
+                    <div class="dashboard ">
+                        <div class="page-title ">
+                            <h2>My Dashboard</h2>
+                        </div>
+                        <div class="welcome-msg ">
+                            <p><b>Hello, {{user.firstName}} {{user.lastName}}</b></p>
+                            <p>From your My Account Dashboard you have the ability to view a snapshot of your recent
+                                account activity and update your account information. Select a link below to view or
+                                edit information.</p>
+                        </div>
+                        <div class="box-account box-info ">
+                            <div class="box-head ">
+                                <h2>Account Information</h2>
+                            </div>
+                            <div class="row ">
+                                <div class="col-sm-6 ">
+                                    <div class="box ">
+                                        <div class="box-title ">
+                                            <h3>Contact Information</h3>
+                                            <a href="javascript:void(0) ">Edit</a>
+                                        </div>
+                                        <div class="box-content ">
+                                            <h6>{{user.firstName}} {{user.lastName}}</h6>
+                                            <h6>{{user.email}}</h6>
+                                            <h6><a href="javascript:void(0)" routerLink="/pages/change/password">Change
+                                                    Password</a></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 ">
+                                    <div class="box ">
+                                        <div class="box-title ">
+                                            <h3>Newsletters</h3>
+                                            <a href="javascript:void(0) ">Edit</a>
+                                        </div>
+                                        <div class="box-content ">
+                                            <p>
+                                                You are currently not subscribed to any newsletters.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="box ">
+                                    <div class="box-title ">
+                                        <h3>Address Book</h3>
+                                        <a href="javascript:void(0) " routerLink="/pages/addresses">Manage Addresses</a>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-sm-6 ">
+                                            <h6>Default Billing Address</h6>
+                                            <address *ngIf="user.billingAddress == undefined">
+                                                You have not set a default billing address.<br>
+                                                <a href="javascript:void(0) " (click)="addBillingAddressClicked()">Add
+                                                    Address</a>
+                                            </address>
+                                            <address *ngIf="user.billingAddress != undefined">
+                                                <b>{{defaultBillingAddress.name}}</b><br>
+                                                {{defaultBillingAddress.address1}}<br>
+                                                {{defaultBillingAddress.address2}}<br
+                                                    *ngIf="defaultBillingAddress.address2 != ''">
+                                                {{defaultBillingAddress.city}}, {{defaultBillingAddress.state}}
+                                                {{defaultBillingAddress.zip}}<br>
+                                                {{defaultBillingAddress.country}}<br>
+                                                Phone: {{defaultBillingAddress.phone}}<br>
+                                                <a href="javascript:void(0) "
+                                                    (click)="addBillingAddressClicked()">Change Billing Address</a>
+                                            </address>
+                                        </div>
+                                        <p *ngIf="mobile">&nbsp;</p>
+                                        <hr *ngIf="mobile"
+                                            style="height:2px;border-width:0;color:gray;background-color:gray">
+                                        <p *ngIf="mobile">&nbsp;</p>
+                                        <div class="col-sm-6 ">
+                                            <h6>Default Shipping Address</h6>
+                                            <address *ngIf="user.shippingAddress == undefined">
+                                                You have not set a default shipping address.<br>
+                                                <a href="javascript:void(0)" (click)="addShippingAddressClicked()">Add
+                                                    Address</a>
+                                            </address>
+                                            <address *ngIf="user.shippingAddress != undefined">
+                                                <b>{{defaultShippingAddress.name}}</b><br>
+                                                {{defaultShippingAddress.address1}}<br>
+                                                {{defaultShippingAddress.address2}}<br
+                                                    *ngIf="defaultShippingAddress.address2 != ''">
+                                                {{defaultShippingAddress.city}}, {{defaultShippingAddress.state}}
+                                                {{defaultShippingAddress.zip}}<br>
+                                                {{defaultShippingAddress.country}}<br>
+                                                Phone: {{defaultShippingAddress.phone}}<br>
+                                                <a href="javascript:void(0) "
+                                                    (click)="addShippingAddressClicked()">Change Shipping Address</a>
+                                            </address>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay-wrapper visible" #pageoverlay (click)="closeDialog()">
+        <div *ngIf="selectBillingAddress || selectShippingAddress" class="overlay-content" role="dialog" tabindex="0"
+            aria-label="Add address" style="width:400px;">
+            <div class="header-wrapper">
+                <div class="overlay-header" *ngIf="selectBillingAddress">
+                    <h3>Select Billing Address</h3>
+                </div>
+                <div class="overlay-header" *ngIf="selectShippingAddress">
+                    <h3>Select Shipping Address</h3>
+                </div>
+                <button *ngIf="selectBillingAddress " type="button" class="close col-xs-2 close-button"
+                    aria-label="Close" (click)="closeBillingDialog()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <button *ngIf="selectShippingAddress" type="button" class="close col-xs-2 close-button"
+                    aria-label="Close" (click)="closeShippingDialog()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <a href="javascript:void(0)" *ngFor="let address of user.addresses, let i=index"
+                (click)="addDefault(address._id)">
+                <div class="address-box center">
+                    <div class="address-header"
+                        *ngIf="(user.billingAddress != address._id) && (user.shippingAddress != address._id)">
+                        &nbsp;
+                    </div>
+                    <div class="address-header"
+                        *ngIf="(user.billingAddress == address._id) && (user.shippingAddress != address._id)">
+                        <div class="address-default">
+                            <h5><b>Billing</b></h5>
+                        </div>
+                    </div>
+                    <div class="address-header"
+                        *ngIf="(user.billingAddress == address._id) && (user.shippingAddress == address._id)">
+                        <div class="address-default">
+                            <h5><b>Billing | Shipping</b></h5>
+                        </div>
+                    </div>
+                    <div class="address-header"
+                        *ngIf="(user.billingAddress != address._id) && (user.shippingAddress == address._id)">
+                        <div class="address-default">
+                            <h5><b>Shipping</b></h5>
+                        </div>
+                    </div>
+                    <hr style="height:2px;">
+                    <div class="address-line" style="margin-top: 20px;">
+                        <p style="color: black"><b>{{address.name}}</b></p>
+                    </div>
+                    <div class="address-line">
+                        <p>{{address.address1}}</p>
+                    </div>
+                    <div *ngIf="address.address2 != ''" class="address-line">
+                        <p>{{address.address2}}</p>
+                    </div>
+                    <div class="address-line">
+                        <p>{{address.city}}, {{address.state}} {{address.zip}}</p>
+                    </div>
+                    <div class="address-line">
+                        <p>{{address.country}}</p>
+                    </div>
+                    <div class="address-line">
+                        <p>Phone number: {{address.phone}}</p>
+                    </div>
+                    <div *ngIf="address.address2 == ''" class="address-line">
+                        <p></p>
+                    </div>
+                    <div class="address-links">
+                        <a href="javascript:void(0) ">Edit</a> | <a href="javascript:void(0) "
+                            (click)="deleteAddress(address._id)">Delete</a>
+                    </div>
+                </div>
+            </a>
+            <a href="javascript:void(0)" (click)="addAddressClicked()">
+                <div class="address-box add-address center">
+                    <div class="address-plus-icon"></div>
+                    &nbsp;
+                    <div class="address-plus-text">
+                        <h3>Add Address</h3>
+                    </div>
+                </div>
+                <div>&nbsp;</div>
+            </a>
+        </div>
+    </div>
+</section>
+<!-- section end -->

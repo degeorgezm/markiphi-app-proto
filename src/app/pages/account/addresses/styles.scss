@@ -1,0 +1,66 @@
+/* You can add global styles to this file, and also import other style files */
+
+.address-box {
+    position: relative;
+    height: 280px;
+    max-width: 340px;
+    border-width: 2px;
+    border-color: #dddddd;
+    box-shadow: 0 2px 1px 9 rgba(0, 0, 0, 0.16);
+    border-style: solid;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.add-address {
+    border-style: dashed;
+}
+
+.address-plus-icon {
+    position: relative;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gMfFBUB8Kc3yAAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAABmJLR0QA/wD/AP+gvaeTAAAAP0lEQVRYw+3UsQkAMAwDsPz/o29pHkjnlCKDV6PJVb8myZkKBgYGBgYGBvYg7Da+VTAwMD8GBgYGBgYGBraWBpeqjFTlGtDAAAAAAElFTkSuQmCC) left center no-repeat;
+    width: 50px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+    margin-bottom: auto;
+}
+
+.address-line {
+    position: relative;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: smaller;
+    text-align: left;
+    margin-bottom: -5px;
+    margin-top: -5px;
+}
+
+.address-header {
+    height: 22px;
+    border-width: 2px;
+}
+
+.address-links {
+    position: absolute;
+    bottom: 5px;
+    left: 12px;
+}
+
+.address-plus-text {}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.theme-header {
+    position: relative;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: #222222;
+    font-weight: 700;
+    margin-top: -4px;
+}

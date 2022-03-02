@@ -1,0 +1,29 @@
+div.stars {
+    display: inline-block;
+    margin-left: 0px;
+  }
+  
+  input.star { display: none; }
+  
+  label.star {
+    float: right;
+    padding-right: 10px;
+    font-size: 24px;
+    color: #444;
+  }
+  
+  input.star:checked ~ label.star:before {
+    content: '\f005';
+    color: #FD4;
+  }
+  
+  input.star-5:checked ~ label.star:before {
+    color: #FD4;
+  }
+  
+  input.star-1:checked ~ label.star:before { color: #FD4; }
+  
+  label.star:before {
+    content: '\f006';
+    font-family: FontAwesome;
+  }

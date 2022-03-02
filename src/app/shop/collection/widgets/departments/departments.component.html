@@ -1,0 +1,15 @@
+<div class="collection-collapse-block" [class.open]="collapse" *ngIf="filterbydepartment.length">
+    <h3 class="collapse-block-title" (click)="collapse = !collapse">line</h3>
+    <div class="collection-collapse-block-content">
+        <div class="collection-brand-filter">
+            <div class="custom-control custom-checkbox collection-filter-checkbox"
+                *ngFor="let department of filterbydepartment; let i = index" style="padding-left: 0;">
+                <input type="checkbox" [value]="filterIdByName(department)"
+                    [checked]="checked(filterIdByName(department))" [id]="department" (change)="appliedFilter($event)"
+                    class="custom-control-input" style="opacity: 1;" />
+                <label class="custom-control-label" for="{{ department }}" style="padding-left: 40px;">{{ department
+                    }}</label>
+            </div>
+        </div>
+    </div>
+</div>

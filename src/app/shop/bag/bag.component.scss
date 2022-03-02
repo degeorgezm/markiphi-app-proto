@@ -1,0 +1,41 @@
+.actions i {
+    display:inline-block;
+}
+
+
+pre {
+    font: 15px Arial, sans-serif; 
+    overflow: hidden;
+}
+
+.whiteSpace { 
+    white-space: normal;
+}
+
+@media (max-width:2000px) and (min-width:400px) {
+    .whiteSpace {
+        white-space: pre-wrap;
+    }
+}
+
+.td-color {
+    color: var(--theme-default);
+}
+
+.mobile-cart-content {
+    position: relative;
+    bottom: 20px;
+}
+
+.title {
+    position: relative;
+    top: 20px;
+}
+
+.col-xs-3 {
+    bottom: 10px;
+}
+
+.section-b-space {
+    overflow-x: scroll;
+}

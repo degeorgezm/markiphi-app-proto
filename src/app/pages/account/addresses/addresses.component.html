@@ -1,0 +1,104 @@
+<app-breadcrumb [title]="'Addresses'" [breadcrumb]="'Addresses'"></app-breadcrumb>
+<!-- section start -->
+<section class=" section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="container" style="position: relative; height: 50px;">
+                    <div style="float: left">
+                        <h3 class="theme-header" style="padding-left: 0px;">Addresses</h3>
+                    </div>
+                    <!-- <div style="float: right">
+                        <a href="javascript:void(0) " class="btn btn-primary"
+                            style="color: white; right: 15px; top: -12px; position: relative;">
+                            Dashboard
+                        </a>
+                    </div> -->
+                </div>
+                <div class="theme-card" style="padding-bottom: 30px">
+                    <a href="javascript:void(0)" routerLink="/pages/address">
+                        <div class="address-box add-address" style="position: relative; top: -22px;">
+                            <div class="address-plus-icon"></div>
+                            &nbsp;
+                            <div class="address-plus-text">
+                                <h3>Add Address</h3>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="address-box" *ngFor="let address of user.addresses, let i=index">
+                        <div class="address-header"
+                            *ngIf="(user.billingAddress != address._id) && (user.shippingAddress != address._id)">
+                            &nbsp;
+                        </div>
+                        <div class="address-header"
+                            *ngIf="(user.billingAddress == address._id) && (user.shippingAddress != address._id)">
+                            <div class="address-default">
+                                <h5><b>Billing</b></h5>
+                            </div>
+                        </div>
+                        <div class="address-header"
+                            *ngIf="(user.billingAddress == address._id) && (user.shippingAddress == address._id)">
+                            <div class="address-default">
+                                <h5><b>Billing | Shipping</b></h5>
+                            </div>
+                        </div>
+                        <div class="address-header"
+                            *ngIf="(user.billingAddress != address._id) && (user.shippingAddress == address._id)">
+                            <div class="address-default">
+                                <h5><b>Shipping</b></h5>
+                            </div>
+                        </div>
+                        <hr style="height:2px;">
+                        <div class="address-line" style="margin-top: 20px;">
+                            <p style="color: black"><b>{{address.name}}</b></p>
+                        </div>
+                        <div class="address-line">
+                            <p>{{address.address1}}</p>
+                        </div>
+                        <div *ngIf="address.address2 != ''" class="address-line">
+                            <p>{{address.address2}}</p>
+                        </div>
+                        <div class="address-line">
+                            <p>{{address.city}}, {{address.state}} {{address.zip}}</p>
+                        </div>
+                        <div class="address-line">
+                            <p>{{address.country}}</p>
+                        </div>
+                        <div class="address-line">
+                            <p>Phone number: {{address.phone}}</p>
+                        </div>
+                        <div *ngIf="address.address2 == ''" class="address-line">
+                            <p></p>
+                        </div>
+                        <div class="address-links"
+                            *ngIf="(address._id != user.billingAddress) && (address._id != user.shippingAddress)">
+                            <a href="javascript:void(0)" (click)="editAddress(address._id)">Edit</a> | <a
+                                href="javascript:void(0) " (click)="deleteAddress(address._id)">Delete</a> | <a
+                                href="javascript:void(0) " (click)="addDefault(address._id, 'billing')">Set Billing</a>
+                            | <a href="javascript:void(0) " (click)="addDefault(address._id, 'shipping')">Set
+                                Shipping</a>
+                        </div>
+                        <div class="address-links"
+                            *ngIf="(address._id == user.billingAddress) && (address._id != user.shippingAddress)">
+                            <a href="javascript:void(0)" (click)="editAddress(address._id)">Edit</a> | <a
+                                href="javascript:void(0) " (click)="deleteAddress(address._id)">Delete</a> | <a
+                                href="javascript:void(0) " (click)="addDefault(address._id, 'shipping')">Set
+                                Shipping</a>
+                        </div>
+                        <div class="address-links"
+                            *ngIf="(address._id != user.billingAddress) && (address._id == user.shippingAddress)">
+                            <a href="javascript:void(0)" (click)="editAddress(address._id)">Edit</a> | <a
+                                href="javascript:void(0) " (click)="deleteAddress(address._id)">Delete</a> | <a
+                                href="javascript:void(0) " (click)="addDefault(address._id, 'billing')">Set Billing</a>
+                        </div>
+                        <div class="address-links"
+                            *ngIf="(address._id == user.billingAddress) && (address._id == user.shippingAddress)">
+                            <a href="javascript:void(0)" (click)="editAddress(address._id)">Edit</a> | <a
+                                href="javascript:void(0) " (click)="deleteAddress(address._id)">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

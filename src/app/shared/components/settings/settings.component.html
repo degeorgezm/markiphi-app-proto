@@ -1,0 +1,99 @@
+<div class="icon-nav">
+  <ul>
+    <li class="onhover-div mobile-search search-widgets" id="search-widgets">
+      <div (click)="searchToggle()">
+        <img src="assets/images/icon/search.png" class="img-fluid" alt="Search" title="Search">
+        <i class="ti-search"></i>
+      </div>
+    </li>
+    <li class="onhover-div mobile-setting">
+      <div><img src="assets/images/icon/setting.png" class="img-fluid" alt="Settings" title="Settings" width="24px"
+          height="24px">
+        <i class="ti-settings"></i>
+      </div>
+      <div class="show-div setting">
+        <h6>language</h6>
+        <ul>
+          <li *ngFor="let language of languages">
+            <a href="javascript:void(0)" (click)="changeLanguage(language.code)">{{ language.name }}</a>
+          </li>
+        </ul>
+        <h6>currency</h6>
+        <ul class="list-inline">
+          <li *ngFor="let currency of currencies">
+            <a href="javascript:void(0)" (click)="changeCurrency(currency)">{{ currency.name }}</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="onhover-div mobile-wishlist">
+      <div>
+        <a [routerLink]="['/shop/wishlist']">
+          <img src="assets/images/icon/heart.png" class="img-fluid" alt="Wishlist" title="Wishlist" width="22px"
+            height="24px">
+          <i class="ti-heart"></i>
+        </a>
+      </div>
+      <span class="wishlist_qty_cls">{{ getTotalWishlistItems() }}</span>
+    </li>
+    <li class="onhover-div mobile-cart">
+      <div>
+        <a [routerLink]="['/shop/bag']">
+          <img src="assets/images/icon/shopping-bag.png" class="img-fluid" alt="Shopping Bag" title="Shopping Bag"
+            width="22px" height="24px">
+          <i class="ti-bag"></i>
+        </a>
+      </div>
+      <span class="cart_qty_cls">{{ getTotalItems() }}</span>
+      <ul class="show-div shopping-cart" *ngIf='getTotalItems() == 0'>
+        <h5>Your bag is currently empty.</h5>
+      </ul>
+      <ul class="show-div shopping-cart" *ngIf='(bag != undefined) && (bag.items.length > 0)'>
+        <li *ngFor="let item of bag.items; let i=index">
+          <div class="media">
+            <a [routerLink]="['/shop/product/left/sidebar/', item.product._id]">
+              <img class="mr-3" [src]="item.product.image.src" [alt]="item.product.image.alt">
+            </a>
+            <div class="media-body">
+              <a [routerLink]="['/shop/product/left/sidebar/', item.product._id]">
+                <h4 style="font-size: 14px;">{{ item.product.title.length > 50 ?
+                  item.product.title.substring(0,50)+'...' : item.product.title }}
+                </h4>
+              </a>
+              <h4 style="font-size: 14px;">
+                <span>
+                  {{ item.quantity }} x
+                  ${{ item.product.sale ? (item.product.price - item.product.discount).toFixed(2) :
+                  (item.product.price).toFixed(2)
+                  }}
+                </span>
+              </h4>
+            </div>
+          </div>
+          <div class="close-circle" (click)="removeItem(item)">
+            <a href="javascript:void(0)"><i class="ti-close" aria-hidden="true"></i></a>
+          </div>
+          <hr *ngIf="i != bag.items.length - 1">
+        </li>
+        <li>
+          <div class="total">
+            <h5>subtotal : <span>${{ (bag.getSubTotal()).toFixed(2) }}</span>
+            </h5>
+          </div>
+        </li>
+        <li>
+          <div class="buttons">
+            <a [routerLink]="['/shop/bag']" class="view-cart">view bag</a>
+            <a [routerLink]="['/shop/checkout']" class="checkout">checkout</a>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li class="search-list-item">
+      <form action="#" class="search-container" id="search-form">
+        <input type="text" placeholder="Search..." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </li>
+  </ul>
+</div>

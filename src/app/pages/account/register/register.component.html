@@ -1,0 +1,157 @@
+<app-breadcrumb [title]="'Register'" [breadcrumb]="'Register'"></app-breadcrumb>
+<!-- section start -->
+<section class="register-page section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>create account</h3>
+                <div class="theme-card">
+                    <form class="theme-form" (ngSubmit)="onSubmit(f.value)" #f="ngForm">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="firstName">First Name</label>
+                                <input type="text" class="form-control" id="fname" placeholder="First Name" required=""
+                                    ngModel name="firstName">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" class="form-control" id="lname" placeholder="Last Name" required=""
+                                    ngModel name="lastName">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Email" required=""
+                                    ngModel email name="email" #email="ngModel">
+                                <p class=".text-danger formError" *ngIf="!email.valid && email.touched">Please enter a
+                                    valid email</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone">Phonenumber</label>
+                                <input type="text" maxlength="14" minlength="14" class="form-control" id="phone"
+                                    placeholder="Phonenumber" required="" ngModel name="phone" #phone="ngModel"
+                                    (keyup)="phoneOnChange()" #phonenumber>
+                                <p class=".text-danger formError" *ngIf="!phoneValid && phoneCompleted">Please enter a
+                                    valid phone number</p>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="day">Birthday</label>
+                                <select class="form-control" name="month" id="month" required="" ngModel
+                                    #month="ngModel" placeholder="Month">
+                                    <option value="" disabled select>Month</option>
+                                    <option value="01">January</option>
+                                    <option value="02">Febuary</option>
+                                    <option value="03">March</option>
+                                    <option value="04">April</option>
+                                    <option value="05">May</option>
+                                    <option value="06">June</option>
+                                    <option value="07">July</option>
+                                    <option value="08">August</option>
+                                    <option value="09">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="day"> &nbsp; </label>
+                                <select class="form-control" name="day" id="day" required="" ngModel #day="ngModel"
+                                    title="Day">
+                                    <option value="" disabled select>Day</option>
+                                    <option value="01">1</option>
+                                    <option value="02">2</option>
+                                    <option value="03">3</option>
+                                    <option value="04">4</option>
+                                    <option value="05">5</option>
+                                    <option value="06">6</option>
+                                    <option value="07">7</option>
+                                    <option value="08">8</option>
+                                    <option value="09">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="gender">Gender (Optional)</label>
+                                <select class="form-control" name="gender" id="gender" ngModel #gender="ngModel"
+                                    title="Gender">
+                                    <option value="" select>Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Non-Binary">Non-Binary</option>
+                                    <option value="Undefined">Undefined</option>
+                                    <option value="Unspecified">Unspecified</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="password">Password</label>
+                                <p class="passwordTip">{{passwordTipMessage}}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="password2">Password Confirmation</label>
+                                <p class="passwordTip" aria-disabled="true">{{passwordTipHiddenMessage}}</p>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" id="password"
+                                    placeholder="Enter your password" required="" ngModel name="password" #password1
+                                    (keyup)="password1OnChange()">
+                                <p class=".text-danger formError" *ngIf="!passwordsMatch && passwordEntry2Started">
+                                    Passwords do not match.</p>
+                                <p class=".text-danger formError"
+                                    *ngIf="passwordEntryStarted && !passwordContainsLower">Password must contain atleast
+                                    1 lowercase value.</p>
+                                <p class=".text-danger formError"
+                                    *ngIf="passwordEntryStarted && !passwordContainsUppercase">Password must contain
+                                    atleast 1 uppercase value.</p>
+                                <p class=".text-danger formError"
+                                    *ngIf="passwordEntryStarted && !passwordContainsCharacter">Password must contain
+                                    atleast 1 special character value.</p>
+                                <p class=".text-danger formError"
+                                    *ngIf="passwordEntryStarted && !passwordContainsNumber">Password must be atleast 1
+                                    number.</p>
+                                <p class=".text-danger formError" *ngIf="passwordEntryStarted && !passwordIs8CharsLong">
+                                    Password must be atleast 8 characters long.</p>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" id="password2"
+                                    placeholder="Enter your password" required="" name="password2" #password2
+                                    (keyup)="password2OnChange()">
+                            </div>
+                        </div>
+                        <button class="btn btn-solid" [disabled]="!f.valid || !passwordIsValid">create Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Section ends-->

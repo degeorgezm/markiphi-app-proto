@@ -1,0 +1,41 @@
+.address-box {
+    display: inline-block;
+    min-width: 300px;
+    margin-left: 20px;
+}
+
+.address-line {
+    max-width: 275px;
+    overflow: hidden;
+    height: 30px;
+}
+
+.address-plus-icon {
+    position: relative;
+    margin-bottom: 107px;
+    margin-left: 130px;
+    top: -10px;
+}
+
+.address-plus-text {
+    position: relative;
+    text-align: center;
+    margin-top: -110px;
+    margin-left: 5px;
+    top: -20px;
+}
+
+hr {
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: unset; // 1
+}
+
+.dashboard-right {
+    float: right;
+}

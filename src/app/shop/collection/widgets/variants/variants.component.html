@@ -1,0 +1,13 @@
+<div class="collection-collapse-block" [class.open]="collapse" *ngIf="filterbyvariant.length">
+  <h3 class="collapse-block-title" (click)="collapse = !collapse">variants</h3>
+  <div class="collection-collapse-block-content">
+    <div class="collection-brand-filter color-filter">
+      <div class="custom-control custom-checkbox collection-filter-checkbox" *ngFor="let variant of filterbyvariant"
+        style="padding-left: 0;">
+        <input type="checkbox" [value]="filterIdByName(variant)" [checked]="checked(filterIdByName(variant))"
+          [id]="variant" (change)="appliedFilter($event)" class="custom-control-input" style="opacity: 1;" />
+        <label class=" custom-control-label" for="{{ variant }}" style="padding-left: 40px;">{{ variant }}</label>
+      </div>
+    </div>
+  </div>
+</div>

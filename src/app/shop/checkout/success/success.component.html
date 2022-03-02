@@ -1,0 +1,123 @@
+<!-- breadcrumb start -->
+<app-breadcrumb [title]="'404 page'" [breadcrumb]="'404 page'" *ngIf="!order && loaded"></app-breadcrumb>
+<!-- breadcrumb End -->
+
+<!-- section start -->
+<section class="p-0" *ngIf="!order && loaded">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="error-section">
+                    <h1>404</h1>
+                    <h2>page not found</h2>
+                    <a [routerLink]="'/home/fashion'" class="btn btn-solid">back to home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section ends -->
+
+<!-- thank-you section start -->
+<section class="section-b-space light-layout" *ngIf="loaded && loaded">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="success-text">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    <h2>thank you</h2>
+                    <p>Your payment has been received and the order placed successfully</p>
+                    <p>Transaction ID: {{ order.orderId }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section ends -->
+
+<!-- order-detail section start -->
+<section class="section-b-space" *ngIf="order && loaded">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product-order">
+                    <h3 style="padding-bottom: 10px;">your order details</h3>
+                    <div class="row product-order-detail" *ngFor="let item of order.items">
+                        <div class="col-2">
+                            <img [src]="item.product.image.src" alt="" height="65" width="65">
+                        </div>
+                        <div class="col-7 order_detail" style="padding-left: 15px;">
+                            <div>
+                                <h5 style="font-size: 12px;">{{ item.quantity }} × {{ item.getTitle }}</h5>
+                            </div>
+                        </div>
+                        <div class="col-3 order_detail">
+                            <div>
+                                <h5 *ngIf="item.product.sale; else regularprice">
+                                    {{"$"+((item.product.price - item.product.discount)*(item.quantity)).toFixed(2)}}
+                                    <del>{{"$"+(item.product.price * item.quantity).toFixed(2)}}</del>
+                                </h5>
+                                <ng-template #regularprice>
+                                    <h5>{{"$"+(item.product.price * item.quantity).toFixed(2)}}</h5>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="total-sec">
+                        <ul>
+                            <li>Subtotal <span>{{ "$"+order.sub_total.toFixed(2)}}</span></li>
+                            <li>Shipping <span>{{ "$"+order.shipping.toFixed(2)}}</span></li>
+                            <li>Tax <span>{{ "$"+order.tax.toFixed(2)}}</span></li>
+                        </ul>
+                    </div>
+                    <div class="final-total">
+                        <h3>total <span>{{ "$"+order.total.toFixed(2) }}</span></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row order-success-sec">
+                    <div class="col-sm-6">
+                        <h4>summary</h4>
+                        <ul class="order-detail">
+                            <li>order ID: {{ order.orderId }}</li>
+                            <li>Order Date: {{ orderDateString }}</li>
+                            <li>Order Total: {{ "$"+order.total.toFixed(2) }}</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>shipping address</h4>
+                        <ul class="order-detail">
+                            <li>{{order.shipping_address.name}}</li>
+                            <li>{{order.shipping_address.address1}}</li>
+                            <li>{{order.shipping_address.address2}}</li>
+                            <li>{{order.shipping_address.city}}, {{order.shipping_address.state}}
+                                {{order.shipping_address.zip}}</li>
+                            <li>{{order.shipping_address.phone}}</li>
+                        </ul>
+                    </div>
+
+                    <!-- <div class="col-sm-12 payment-mode">
+                        <h4>payment method</h4>
+                        <p>Pay on Delivery (Cash/Card). Cash on delivery (COD) available. Card/Net banking acceptance
+                            subject to device availability.</p>
+                    </div> -->
+                    <div class="col-md-12">
+                        <div class="delivery-sec">
+                            <h3>expected date of delivery</h3>
+                            <h2>{{deliveryDateString}}</h2>
+                        </div>
+                        <div class="button-container">
+                            <button class="btn btn-solid button" [routerLink]="['**']">Home</button>
+                            <button class="btn btn-solid button" [routerLink]="['/pages/orders']">Orders</button>
+                            <button class="btn btn-solid button" [routerLink]="['/pages/dashboard']">Dashboard</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Section ends -->

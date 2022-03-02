@@ -1,0 +1,56 @@
+<div *ngIf="loaded">
+  <div class="img-wrapper">
+    <div class="lable-block">
+      <span class="lable3" *ngIf="product.new">new</span>
+      <span class="lable4" *ngIf="product.sale">on sale</span>
+    </div>
+    <div class="front">
+      <a href="javascript:void(0)">
+        <img [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'"
+          [lazyLoad]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" class="img-fluid lazy-loading"
+          alt="{{ product.image.alt }}" />
+      </a>
+    </div>
+    <ul class="product-thumb-list" *ngIf="thumbnail">
+      <li class="grid_thumb_img" [class.active]="ImageSrc == image.src" *ngFor="let image of product.images">
+        <a href="javascript:void(0)" (mouseover)="ChangeVariantsImage(image.src)">
+          <img [src]="image.src">
+        </a>
+      </li>
+    </ul>
+    <div class="cart-info cart-wrap">
+      <a href="javascript:void(0)" title="Shop" (click)="viewProduct()">
+        <i class="ti-bag"></i>
+      </a>
+      <a href="javascript:void(0)" title="Add to Wishlist" (click)="QuickViewWishlist.openModal()">
+        <i class="ti-heart" aria-hidden="true"></i>
+      </a>
+      <a href="javascript:void(0)" title="Quick View" (click)="QuickView.openModal()">
+        <i class="ti-search" aria-hidden="true"></i>
+      </a>
+      <!--       <a href="javascript:void(0)" title="Compare" (click)="addToCompare(product)">
+        <i class="ti-gallery" aria-hidden="true"></i>
+      </a> -->
+    </div>
+  </div>
+  <div class="product-detail">
+    <div>
+      <bar-rating [rate]="5" [readOnly]="true"></bar-rating>
+      <a href="javascript:void(0)" (click)="viewProduct()">
+        <h6>{{ product?.title | titlecase }}</h6>
+      </a>
+      <p>{{ product?.description }}</p>
+      <h4 *ngIf=" product.sale; else regularprice">${{(product.price - product.discount).toFixed(2)}}
+        <del>${{product.price.toFixed(2)}}</del>
+      </h4>
+      <ng-template #regularprice>
+        <h4>${{product.price.toFixed(2)}}</h4>
+      </ng-template>
+    </div>
+  </div>
+</div>
+<app-skeleton-product-box *ngIf="!loaded"></app-skeleton-product-box>
+<app-quick-view #quickView [product]="product"></app-quick-view>
+<app-quick-view-wishlist #quickViewWishlist [product]="product"></app-quick-view-wishlist>
+<app-cart-modal #cartModal [product]=" product" *ngIf="cartModal">
+</app-cart-modal>

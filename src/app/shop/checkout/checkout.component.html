@@ -1,0 +1,252 @@
+<head>
+    <title>Designica</title>
+    <script type="text/javascript" src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
+</head>
+<app-breadcrumb [title]="'Checkout'" [breadcrumb]="'Checkout'"></app-breadcrumb>
+<section class="section-b-space">
+    <div class="container padding-cls">
+        <div class="checkout-page">
+            <div class="checkout-form">
+                <form>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12 col-xs-12" style="display: relative; margin-bottom: 20px;">
+                            <div class="checkout-title">
+                                <h3>Shipping Details</h3>
+                            </div>
+                            <div class="displayAddressDiv default-address" *ngIf="defaultShippingAddress != undefined"
+                                [ngClass]="{mobile: mobile == true}">
+                                <ul class="displayAddressUL">
+                                    <li class="displayAddressLI displayAddressFullName">
+                                        {{defaultShippingAddress.name}}
+                                    </li>
+                                    <li class="displayAddressLI">
+                                        {{defaultShippingAddress.address1}}
+                                    </li>
+                                    <li class="displayAddressLI" *ngIf="defaultShippingAddress.address2 != undefined">
+                                        {{defaultShippingAddress.address2}}
+                                    </li>
+                                    <li class="displayAddressLI">
+                                        {{defaultShippingAddress.city}}, {{defaultShippingAddress.state}}
+                                        {{defaultShippingAddress.zip}}
+                                    </li>
+                                    <li class="displayAddressLI">
+                                        {{defaultShippingAddress.country}}
+                                    </li>
+                                    <li class="displayAddressLI">
+                                        Phone: {{defaultShippingAddress.phone}}
+                                    </li>
+                                </ul>
+                                <div>
+                                    <button *ngIf="defaultShippingAddress._id != selectedShippingAddress"
+                                        class="btn-primary"
+                                        (click)="selectShippingAddress(defaultShippingAddress._id)">Select
+                                        Delivery</button>
+                                    <button *ngIf="defaultShippingAddress._id == selectedShippingAddress"
+                                        class="btn-primary" disabled="true">Delivery Address</button>
+                                </div>
+                            </div>
+                            <div class="displayAddressDiv" *ngFor="let address of shownShippingAddresses"
+                                [ngClass]="{mobile: mobile == true}">
+                                <ul class="displayAddressUL">
+                                    <li class="displayAddressLI displayAddressFullName">
+                                        {{address.name}}
+                                    </li>
+                                    <li class="displayAddressLI">
+                                        {{address.address1}}
+                                    </li>
+                                    <li class="displayAddressLI" *ngIf="address.address2 != undefined">
+                                        {{address.address2}}
+                                    </li>
+                                    <li class="displayAddressLI" *ngIf="address.address2 == undefined">
+
+                                    </li>
+                                    <li class="displayAddressLI">
+                                        {{address.city}}, {{address.state}}
+                                        {{address.zip}}
+                                    </li>
+                                    <li class="displayAddressLI">
+                                        {{address.country}}
+                                    </li>
+                                    <li class="displayAddressLI">
+                                        Phone: {{address.phone}}
+                                    </li>
+                                </ul>
+                                <div>
+                                    <button *ngIf="address._id != selectedShippingAddress" class="btn-primary"
+                                        (click)="selectShippingAddress(address._id)">Select Delivery</button>
+                                    <button *ngIf="address._id == selectedShippingAddress" class="btn-primary"
+                                        disabled="true">Delivery Address</button>
+                                </div>
+                            </div>
+                            <div class="show-more" *ngIf="remainingShippingAddresses > 0">
+                                <ul>
+                                    <li><span><a href="javascript:void(0)" (click)="addShippingLines()">Show
+                                                More</a></span></li>
+                                </ul>
+                            </div>
+                            <div class="show-more" *ngIf="remainingShippingAddresses <= 0">
+                                <ul>
+                                    <li><span><a href="javascript:void(0)"
+                                                (click)="resetShippingLines()">Hide</a></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div style="display: relative; margin: auto; width: 100%; text-align: center;">
+                                <button class=" btn-primary btn-add-address" (click)="addShippingAddress()">
+                                    Add New Shipping Address
+                                </button>
+                            </div>
+                            <div class="checkout-title" style="padding-top: 40px;">
+                                <h3>Billing Details</h3>
+                            </div>
+                            <div class="displayAddressDiv default-address" *ngIf="defaultBillingAddress != undefined"
+                                [ngClass]="{mobile: mobile == true}">
+                                <ul class="displayAddressUL">
+                                    <li class="displayAddressLI displayAddressFullName">
+                                        {{defaultBillingAddress.name}}
+                                    </li>
+                                    <li class="displayAddressLI">
+                                        {{defaultBillingAddress.address1}}
+                                    </li>
+                                    <li class="displayAddressLI" *ngIf="defaultBillingAddress.address2 != undefined">
+                                        {{defaultBillingAddress.address2}}
+                                    </li>
+                                    <li class="displayAddressLI">
+                                        {{defaultBillingAddress.city}}, {{defaultBillingAddress.state}}
+                                        {{defaultBillingAddress.zip}}
+                                    </li>
+                                    <li class="displayAddressLI">
+                                        {{defaultBillingAddress.country}}
+                                    </li>
+                                    <li class="displayAddressLI">
+                                        Phone: {{defaultBillingAddress.phone}}
+                                    </li>
+                                </ul>
+                                <div>
+                                    <button *ngIf="defaultBillingAddress._id != selectedBillingAddress"
+                                        class="btn-primary"
+                                        (click)="selectBillingAddress(defaultBillingAddress._id)">Select
+                                        Billing</button>
+                                    <button *ngIf="defaultBillingAddress._id == selectedBillingAddress"
+                                        class="btn-primary" disabled="true">Billing Address</button>
+                                </div>
+                            </div>
+                            <div class="displayAddressDiv" *ngFor="let address of shownBillingAddresses"
+                                [ngClass]="{mobile: mobile == true}">
+                                <ul class="displayAddressUL">
+                                    <li class="displayAddressLI displayAddressFullName">
+                                        {{address.name}}
+                                    </li>
+                                    <li class="displayAddressLI">
+                                        {{address.address1}}
+                                    </li>
+                                    <li class="displayAddressLI" *ngIf="address.address2 != undefined">
+                                        {{address.address2}}
+                                    </li>
+                                    <li class="displayAddressLI" *ngIf="address.address2 == undefined">
+
+                                    </li>
+                                    <li class="displayAddressLI">
+                                        {{address.city}}, {{address.state}}
+                                        {{address.zip}}
+                                    </li>
+                                    <li class="displayAddressLI">
+                                        {{address.country}}
+                                    </li>
+                                    <li class="displayAddressLI">
+                                        Phone: {{address.phone}}
+                                    </li>
+                                </ul>
+                                <div>
+                                    <button *ngIf="address._id != selectedBillingAddress" class="btn-primary"
+                                        (click)="selectBillingAddress(address._id)">Select
+                                        Billing</button>
+                                    <button *ngIf="address._id == selectedBillingAddress" class="btn-primary"
+                                        disabled="true">Billing Address</button>
+                                </div>
+                            </div>
+                            <div class="show-more" *ngIf="remainingBillingAddresses > 0">
+                                <ul>
+                                    <li><span><a href="javascript:void(0)" (click)="addBillingLines()">Show
+                                                More</a></span></li>
+                                </ul>
+                            </div>
+                            <div class="show-more" *ngIf="remainingBillingAddresses <= 0">
+                                <ul>
+                                    <li><span><a href="javascript:void(0)" (click)="resetBillingLines()">Hide</a></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div style="display: relative; margin: auto; width: 100%; text-align: center;">
+                                <button class=" btn-primary btn-add-address" (click)="addBillingAddress()">
+                                    Add New Billing Address
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-12 col-xs-12">
+                            <div class="checkout-details">
+                                <div class="order-box">
+                                    <div class="title-box">
+                                        <div>Product <span> Total</span></div>
+                                    </div>
+                                    <ul class="qty" *ngIf='bag != undefined && bag.items.length'>
+                                        <li *ngFor="let item of bag.items" style="height: 25px;">
+                                            <div
+                                                style="width: 70%; float: left; position: relative;padding-right: 10px; font-size: 13px;">
+                                                {{
+                                                item.quantity
+                                                }} × {{ item.getTitle }} </div>
+                                            <div *ngIf="!item.product.sale"
+                                                style="width: 30%; float: right; position: relative;">
+                                                ${{ (item.product.price * item.quantity).toFixed(2) }}
+                                            </div>
+                                            <div *ngIf="item.product.sale"
+                                                style="width: 30%; float: right; position: relative;">
+                                                {{"$"+((item.product.price -
+                                                item.product.discount)*(item.quantity)).toFixed(2)}}
+                                                <del>{{"$"+(item.product.price * item.quantity).toFixed(2)}}</del>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul class="qty" *ngIf='bag == undefined || !bag.items.length'>
+                                        <li class="empty-checkout"> There are no products in bag </li>
+                                    </ul>
+
+                                    <ul class="sub-total">
+                                        <li>Subtotal <span class="count">${{ getTotal }}</span></li>
+                                    </ul>
+                                    <ul class="total">
+                                        <li style="font-size: 16px; font-weight: 600;">Taxes ({{tax_rate+"%"}})<span
+                                                class="count">{{"$"+sales_tax}}</span></li>
+                                        <li style="font-size: 16px; font-weight: 600;">Shipping <span
+                                                class="count">$6.95</span></li>
+                                        <li style="font-size: 16px; font-weight: 600;">Savings <span class="count">{{bag
+                                                ? "$"
+                                                + bag.getTotalDiscount().toFixed(2) : "$0.00"}}</span></li>
+                                        <li style="font-size: 20px; font-weight: 600;">Total <span class="count">${{
+                                                getFinalTotal }}</span></li>
+                                    </ul>
+
+                                    <div class="title-box">
+                                        Payment Methods
+                                        <img src="assets/images/cards-accepted.png"
+                                            style="width: 100%; margin-left: auto; margin-right: auto; margin-top: 10px">
+                                        <!-- <img src="assets/images/payment-types.png"
+                                            style="width: 100%; margin-left: auto; margin-right: auto; margin-top: 10px"> -->
+                                    </div>
+
+                                    <div id="payment-button">
+                                        <button id="sq-creditcard" class="btn-main button-credit-card"
+                                            (click)="reviewOrder()" style="margin-top: 10px;">Review
+                                            Order</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
